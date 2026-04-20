@@ -83,6 +83,7 @@
   flex-direction: column;
   gap: 0.1rem;
   flex: 1;
+  min-width: 0;
 }
 
 .linkLabel {
@@ -138,4 +139,6 @@
   .contact { padding: 5rem 1.5rem 4rem; }
   .inner { grid-template-columns: 1fr; gap: 3rem; }
   .headingOutline { -webkit-text-stroke-width: 1px; }
-  }
+  .linkValue { display: none; }
+  .linkArrow { opacity: 1; transform: none; }
+}

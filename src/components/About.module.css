@@ -150,9 +150,9 @@
 .certNum { color: var(--text2); flex-shrink: 0; font-weight: 500; }
 
 
-@media (max-width: 960px) {
+@media (max-width: 899px) {
   .about { padding: 5rem 1.5rem; }
   .grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .aboutCols { grid-template-columns: 1fr; }
   .parallaxBlock { display: none; }
-  }
+}
