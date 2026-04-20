@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "/electricityprices/*"
+  to = "https://spotpricesapp.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
