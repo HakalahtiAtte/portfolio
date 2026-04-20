@@ -146,7 +146,7 @@ export const projects = [
       '04. Parhaat käyttöajat + kiinteähintavertailu',
       '05. Sticky header, päivityslaskuri',
     ],
-    link: 'https://attehakalahti.fi/electricityprices/',
+    link: 'https://spotpricesapp.netlify.app/',
   },
   {
     id: 'tower-defense',
