@@ -1,0 +1,141 @@
+.contact {
+  padding: 7rem 3.5rem 5rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.heading {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin-bottom: 1rem;
+}
+
+.headingOutline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--stroke-outline);
+}
+
+.rule {
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--muted);
+  margin-bottom: 1.8rem;
+}
+
+.body {
+  font-size: 0.86rem;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+  max-width: 360px;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.linkRow:last-child { border-bottom: none; }
+.linkRow:hover { background: var(--bg2); }
+
+.linkNum {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--bg4);
+  flex-shrink: 0;
+  width: 28px;
+}
+
+.linkRow:hover .linkNum { color: var(--muted); }
+
+.linkMid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.linkLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.linkDesc {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.linkValue {
+  font-size: 0.76rem;
+  color: var(--text2);
+  flex-shrink: 0;
+}
+
+.linkArrow {
+  color: var(--muted);
+  font-size: 0.85rem;
+  opacity: 0;
+  transform: translate(0, 0);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.linkRow:hover .linkArrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.avail {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.availDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text2);
+  flex-shrink: 0;
+  animation: blink 2.5s infinite;
+}
+
+
+@media (max-width: 900px) {
+  .contact { padding: 5rem 1.5rem 4rem; }
+  .inner { grid-template-columns: 1fr; gap: 3rem; }
+  .headingOutline { -webkit-text-stroke-width: 1px; }
+  }

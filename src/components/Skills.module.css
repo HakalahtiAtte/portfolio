@@ -1,0 +1,89 @@
+.skills {
+  padding: 7rem 3.5rem;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.header { margin-bottom: 3rem; }
+
+.label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.heading {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--text);
+}
+
+.rule {
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--muted);
+  margin-top: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5px;
+  background: var(--border);
+}
+
+.group {
+  background: var(--bg);
+  padding: 1.8rem;
+  transition: background 0.2s;
+}
+
+.group:hover { background: var(--bg2); }
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.groupIcon { font-size: 0.82rem; color: var(--text2); }
+
+.groupTitle {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+  font-weight: 400;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+.tag {
+  font-size: 0.68rem;
+  padding: 0.25rem 0.65rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+
+.group:hover .tag { border-color: var(--border2); }
+.tag:hover { color: var(--text2); border-color: var(--muted2); }
+
+
+@media (max-width: 899px) {
+  .skills { padding: 5rem 1.5rem; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  }
+
+@media (max-width: 540px) {
+  .grid { grid-template-columns: 1fr; }
+}

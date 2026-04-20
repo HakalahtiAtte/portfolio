@@ -1,0 +1,300 @@
+/* ── SIDEBAR (desktop) ─────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.8rem;
+  z-index: 200;
+  overflow: hidden;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 3rem;
+}
+
+.logoInitials {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.logoFull {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.sideNav { flex: 1; }
+
+.sideNav ul { list-style: none; display: flex; flex-direction: column; gap: 0.1rem; }
+
+.sideLink {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.55rem 0;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.sideLink:hover { color: var(--text2); }
+
+.sideLinkLine {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--muted2);
+  transition: width 0.25s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.sideLinkActive {
+  color: var(--text);
+}
+
+.sideLinkActive .sideLinkLine {
+  width: 32px;
+  background: var(--text);
+}
+
+/* ── TOGGLE CONTROLS ──────────────────────────────────── */
+.sideControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0 0.75rem;
+}
+
+.langToggle {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.langToggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+.langToggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.themeToggle {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.themeToggle:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+.themeToggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+/* ── SIDEBAR BOTTOM ────────────────────────────────────── */
+.sideBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.availBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+.availDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text2);
+  animation: blink 2.5s infinite;
+  flex-shrink: 0;
+}
+
+.sideEmail {
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  word-break: break-all;
+  transition: color 0.2s;
+}
+.sideEmail:hover { color: var(--text); }
+
+/* ── MOBILE TOPBAR ─────────────────────────────────────── */
+.topbar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  height: 56px;
+  padding: 0 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+
+.topbarScrolled {
+  background: var(--topbar-scrolled-bg);
+  backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+
+.topbarLogo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 380px) {
+  .topbar { padding: 0 0.9rem; }
+  .topbarRight { gap: 0.3rem; }
+}
+
+@media (max-width: 340px) {
+  .topbar { padding: 0 0.75rem; }
+  .topbarLogo { font-size: 0.85rem; }
+}
+
+/* Lang + theme toggles inherit shared styles above */
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.bTop, .bBot,
+.bTopOpen, .bBotOpen {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  transition: transform 0.25s;
+  transform-origin: center;
+}
+.bTopOpen { transform: translateY(3.25px) rotate(45deg); }
+.bBotOpen { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* ── MOBILE DRAWER ─────────────────────────────────────── */
+.drawer {
+  display: none;
+  position: fixed;
+  top: 56px; left: 0; right: 0;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  z-index: 290;
+  padding: 1.5rem 1.25rem 2rem;
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.25s ease;
+}
+
+.drawerOpen {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.drawer ul { list-style: none; }
+
+.drawerLink {
+  display: block;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+.drawerLink:hover { color: var(--text); }
+
+.drawerEmail {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.drawerEmail:hover { color: var(--text); }
+
+.backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 280;
+  background: rgba(0,0,0,0.5);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .sidebar  { display: none; }
+  .topbar   { display: flex; }
+  .drawer   { display: block; }
+  .backdrop { display: block; }
+}
