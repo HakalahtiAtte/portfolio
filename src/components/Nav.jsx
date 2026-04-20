@@ -164,6 +164,7 @@ export default function Nav() {
         id="mobile-menu"
         className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}
         aria-hidden={!menuOpen}
+        {...(!menuOpen && { inert: '' })}
       >
         <nav>
           <ul role="list">

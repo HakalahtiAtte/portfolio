@@ -71,7 +71,7 @@
   font-family: var(--font-head);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--bg4);
+  color: var(--muted);
   flex-shrink: 0;
   width: 28px;
 }

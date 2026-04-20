@@ -47,7 +47,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--muted2);
+  color: var(--muted);
 }
 
 .card {
