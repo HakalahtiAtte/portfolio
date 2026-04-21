@@ -7,7 +7,7 @@ const STACK = ['React', 'JavaScript', 'Vite', 'CSS Modules', 'Unity']
 
 // ── LIGHTHOUSE CARD ───────────────────────────────────────
 const SCORES = [
-  { label: 'Performance',    value: 99  },
+  { label: 'Performance',    value: 100 },
   { label: 'Accessibility',  value: 100 },
   { label: 'Best Practices', value: 100 },
   { label: 'SEO',            value: 100 },
@@ -133,8 +133,8 @@ function LighthouseCard() {
 
           {/* Live dot + header */}
           <circle cx="20" cy="20" r="3" fill={c.dot}/>
-          <text x="30" y="23" fill={c.textHead} fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="3">LIGHTHOUSE</text>
-          <text x="30" y="35" fill={c.textUrl} fontSize="5.5" fontFamily="'DM Mono', monospace" letterSpacing="1.5">hakalahti.com</text>
+          <text x="30" y="23" fill={c.textScore} fontSize="9" fontFamily="'DM Mono', monospace" letterSpacing="3">LIGHTHOUSE</text>
+          <text x="30" y="35" fill={c.textScore} fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="1.5">attehakalahti.fi</text>
 
           {/* Divider */}
           <line x1="16" y1="44" x2="194" y2="44" stroke={c.divider} strokeWidth="0.5"/>
@@ -155,8 +155,8 @@ function LighthouseCard() {
                   strokeLinecap="round"
                   transform={`rotate(-90 ${cx} ${cy})`}
                 />
-                <text x="50" y={cy + 3} textAnchor="end" fill={c.textScore} fontSize="8" fontFamily="'DM Mono', monospace" fontWeight="500">{value}</text>
-                <text x="56" y={cy + 3} fill={c.textLabel} fontSize="6" fontFamily="'DM Mono', monospace" letterSpacing="0.5">{label}</text>
+                <text x="58" y={cy + 3} textAnchor="end" fill={c.textScore} fontSize="10" fontFamily="'DM Mono', monospace" fontWeight="500">{value}</text>
+                <text x="64" y={cy + 3} fill={c.textScore} fontSize="8.5" fontFamily="'DM Mono', monospace" fontWeight="500" letterSpacing="0.5">{label}</text>
               </g>
             )
           })}

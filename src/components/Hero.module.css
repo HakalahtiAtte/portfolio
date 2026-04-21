@@ -272,19 +272,12 @@ a.metaItem:hover {
   50%       { transform: translateY(-10px) rotate(-1deg); }
 }
 
+@media (max-width: 1150px) {
+  .cassetteOuter { display: none; }
+}
+
 @media (max-width: 899px) {
   .hero { align-items: center; min-height: 100svh; }
   .content { padding: 6rem 1.5rem 5rem; }
   .nameLast { -webkit-text-stroke-width: 1px; }
-  .cassetteOuter {
-    top: auto;
-    bottom: 12%;
-    right: 5%;
-    transform: scale(0.8);
-    transform-origin: bottom right;
-  }
-}
-
-@media (max-width: 540px) {
-  .cassetteOuter { display: none; }
 }
