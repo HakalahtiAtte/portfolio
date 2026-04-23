@@ -44,7 +44,7 @@ export const experience = [
     id: 'rws',
     period: '2026 – Present',
     period_fi: '2026 – nyt',
-    company: 'RWS TrainAICommunity',
+    company: 'RWS',
     role: 'AI Language Training Contributor',
     role_fi: 'AI Language Training Contributor',
     type: 'Part-time · Remote · Alongside freelance work',
