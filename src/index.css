@@ -18,7 +18,7 @@
   --border2:   rgba(251,251,251,0.13);
   --accent:    #fbfbfb;
   --topbar-scrolled-bg: rgba(10,10,10,0.95);
-  --stroke-outline: rgba(251,251,251,0.28);
+  --stroke-outline: rgba(251,251,251,0.45);
 
   --font-head:    'Syne', sans-serif;
   --font-display: 'Bebas Neue', sans-serif;
@@ -40,7 +40,7 @@
   --border2:   rgba(10,10,10,0.12);
   --accent:    #0a0a0a;
   --topbar-scrolled-bg: rgba(246,246,245,0.9);
-  --stroke-outline: rgba(10,10,10,0.22);
+  --stroke-outline: rgba(10,10,10,0.50);
 }
 
 html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
@@ -85,6 +85,22 @@ button { font-family: var(--font-mono); cursor: pointer; }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-8px); }
+}
+
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 1rem;
 }
 
 .btn-primary {

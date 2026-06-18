@@ -3,7 +3,7 @@ import { meta, ui } from '../data/content'
 import { useTheme, useLang } from '../context/AppContext'
 import styles from './Hero.module.css'
 
-const STACK = ['React', 'JavaScript', 'Vite', 'CSS Modules', 'Unity']
+const STACK = ['React', 'JavaScript', 'Vite', 'CSS Modules', 'React Native']
 
 // ── LIGHTHOUSE CARD ───────────────────────────────────────
 const SCORES = [

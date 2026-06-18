@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { projects, ui } from '../data/content'
 import { useLang } from '../context/AppContext'
 import LighthouseBadge from './LighthouseBadge'
@@ -6,8 +6,21 @@ import styles from './Projects.module.css'
 
 const p = (obj, key, lang) => (lang === 'fi' && obj[`${key}_fi`]) ? obj[`${key}_fi`] : obj[key]
 
+function Chevron({ open }) {
+  return (
+    <svg
+      width="12" height="12" viewBox="0 0 12 12" fill="none"
+      aria-hidden="true"
+      className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`}
+    >
+      <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
 function ProjectCard({ project, index, t, lang }) {
   const cardRef = useRef(null)
+  const [expanded, setExpanded] = useState(project.group === 'work')
 
   useEffect(() => {
     const el = cardRef.current
@@ -36,17 +49,22 @@ function ProjectCard({ project, index, t, lang }) {
         <h3 id={`proj-${project.id}`} className={styles.cardTitle}>{project.title}</h3>
         <span className={styles.cardRule} aria-hidden="true" />
         <p className={styles.cardSubtitle}>{p(project, 'subtitle', lang)}</p>
-        <p className={styles.cardDesc}>{p(project, 'desc', lang)}</p>
 
-        {project.highlights && (
-          <ul className={styles.highlights} aria-label="Project highlights">
-            {p(project, 'highlights', lang).map(h => (
-              <li key={h} className={styles.highlight}>{h}</li>
-            ))}
-          </ul>
+        {expanded && (
+          <>
+            <p className={styles.cardDesc}>{p(project, 'desc', lang)}</p>
+
+            {project.highlights && (
+              <ul className={styles.highlights} aria-label="Project highlights">
+                {p(project, 'highlights', lang).map(h => (
+                  <li key={h} className={styles.highlight}>{h}</li>
+                ))}
+              </ul>
+            )}
+
+            {project.lighthouse && <LighthouseBadge scores={project.lighthouse} source={project.link} />}
+          </>
         )}
-
-        {project.lighthouse && <LighthouseBadge scores={project.lighthouse} source={project.link} />}
 
         <div className={styles.tags} aria-label="Technologies used">
           {project.tags.map(tag => (
@@ -55,18 +73,32 @@ function ProjectCard({ project, index, t, lang }) {
         </div>
 
         <div className={styles.cardFooter}>
-          {project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.cardLink}
-            >
-              {t.viewLive}
-            </a>
-          ) : (
-            <span className={styles.cardLinkDisabled}>{t.codeOnRequest}</span>
-          )}
+          <button
+            className={styles.expandBtn}
+            onClick={() => setExpanded(v => !v)}
+            aria-expanded={expanded}
+            aria-label={expanded ? t.collapse : t.expand}
+          >
+            <Chevron open={expanded} />
+            <span className={styles.expandLabel}>{expanded ? t.collapse : t.expand}</span>
+          </button>
+
+          <div className={styles.cardLinks}>
+            {project.repoLink && (
+              <a href={project.repoLink} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>
+                {t.repo}
+              </a>
+            )}
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>
+                {t.viewLive}
+              </a>
+            ) : project.codeLink ? (
+              <a href={project.codeLink} className={styles.cardLink}>
+                {t.codeOnRequest}
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>

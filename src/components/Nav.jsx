@@ -48,7 +48,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const ids = ['hero', 'about', 'experience', 'projects', 'skills', 'game', 'contact']
+    const ids = ['hero', 'about', 'experience', 'projects', 'skills', 'contact']
     const onScroll = () => {
       setScrolled(window.scrollY > 20)
       const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 40

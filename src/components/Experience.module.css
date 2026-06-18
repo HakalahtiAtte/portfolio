@@ -132,7 +132,7 @@
   content: '—';
   position: absolute;
   left: 0;
-  color: var(--muted2);
+  color: var(--muted);
 }
 
 .highlight:last-child { border-bottom: none; }
