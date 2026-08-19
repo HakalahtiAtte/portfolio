@@ -20,7 +20,7 @@ function Chevron({ open }) {
 
 function ProjectCard({ project, index, t, lang }) {
   const cardRef = useRef(null)
-  const [expanded, setExpanded] = useState(project.group === 'work')
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     const el = cardRef.current
@@ -41,9 +41,18 @@ function ProjectCard({ project, index, t, lang }) {
       aria-labelledby={`proj-${project.id}`}
     >
       <div className={styles.cardInner}>
-        <div className={styles.cardTop}>
+        <div
+          className={styles.cardTop}
+          onClick={() => setExpanded(v => !v)}
+          role="button"
+          tabIndex={-1}
+          aria-hidden="true"
+        >
           <span className={styles.cardType}>{p(project, 'type', lang)}</span>
-          <span className={styles.cardIndex} aria-hidden="true">0{index + 1}</span>
+          <div className={styles.cardTopRight}>
+            <span className={styles.cardIndex}>0{index + 1}</span>
+            <Chevron open={expanded} />
+          </div>
         </div>
 
         <h3 id={`proj-${project.id}`} className={styles.cardTitle}>{project.title}</h3>
