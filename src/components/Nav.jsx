@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { meta, ui } from '../data/content'
 import { useTheme, useLang } from '../context/AppContext'
 import styles from './Nav.module.css'
@@ -46,6 +46,19 @@ export default function Nav() {
   const [active, setActive]     = useState('hero')
   const [menuOpen, setMenu]     = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const menuButtonRef = useRef(null)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event) => {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      setMenu(false)
+      menuButtonRef.current?.focus()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
 
   useEffect(() => {
     const ids = ['hero', 'about', 'experience', 'projects', 'skills', 'contact']
@@ -148,6 +161,7 @@ export default function Nav() {
           </button>
           <button
             className={styles.burger}
+            ref={menuButtonRef}
             onClick={() => setMenu(v => !v)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}

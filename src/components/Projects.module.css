@@ -78,11 +78,22 @@
 }
 
 .cardTop {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1.2rem;
   cursor: pointer;
+}
+
+.cardTop:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
 }
 
 .cardTopRight {

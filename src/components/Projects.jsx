@@ -1,3 +1,4 @@
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useEffect, useRef, useState } from 'react'
 import { projects, ui } from '../data/content'
 import { useLang } from '../context/AppContext'
@@ -19,11 +20,16 @@ function Chevron({ open }) {
 }
 
 function ProjectCard({ project, index, t, lang }) {
+  const reducedMotion = useReducedMotion()
   const cardRef = useRef(null)
   const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     const el = cardRef.current
+    if (reducedMotion) {
+      if (el) el.style.removeProperty('--parallax-y')
+      return
+    }
     const onScroll = () => {
       if (!el) return
       const rect = el.getBoundingClientRect()
@@ -32,7 +38,7 @@ function ProjectCard({ project, index, t, lang }) {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [reducedMotion])
 
   return (
     <article
@@ -41,19 +47,19 @@ function ProjectCard({ project, index, t, lang }) {
       aria-labelledby={`proj-${project.id}`}
     >
       <div className={styles.cardInner}>
-        <div
+        <button
+          type="button"
           className={styles.cardTop}
           onClick={() => setExpanded(v => !v)}
-          role="button"
-          tabIndex={-1}
-          aria-hidden="true"
+          aria-expanded={expanded}
+          aria-label={`${expanded ? t.collapse : t.expand}: ${project.title}`}
         >
           <span className={styles.cardType}>{p(project, 'type', lang)}</span>
-          <div className={styles.cardTopRight}>
+          <span className={styles.cardTopRight}>
             <span className={styles.cardIndex}>0{index + 1}</span>
             <Chevron open={expanded} />
-          </div>
-        </div>
+          </span>
+        </button>
 
         <h3 id={`proj-${project.id}`} className={styles.cardTitle}>{project.title}</h3>
         <span className={styles.cardRule} aria-hidden="true" />
@@ -117,8 +123,8 @@ function ProjectCard({ project, index, t, lang }) {
 export default function Projects() {
   const { lang } = useLang()
   const t = ui[lang].projects
-  const work = projects.filter(proj => proj.group === 'work')
-  const side = projects.filter(proj => proj.group === 'side')
+  const featured = projects.filter(proj => proj.featured)
+  const more = projects.filter(proj => !proj.featured)
 
   return (
     <section id="projects" className={styles.projects} aria-labelledby="projects-heading">
@@ -129,18 +135,18 @@ export default function Projects() {
       </div>
 
       <div className={styles.grid}>
-        {work.map((proj, i) => (
+        {featured.map((proj, i) => (
           <ProjectCard key={proj.id} project={proj} index={i} t={t} lang={lang} />
         ))}
       </div>
 
-      {side.length > 0 && (
+      {more.length > 0 && (
         <>
           <div className={styles.sideHeader}>
-            <span className={styles.sideLabel}>{lang === 'fi' ? 'Sivuprojektit' : 'Side projects'}</span>
+            <span className={styles.sideLabel}>{t.moreProjects}</span>
           </div>
           <div className={styles.grid}>
-            {side.map((proj, i) => (
+            {more.map((proj, i) => (
               <ProjectCard key={proj.id} project={proj} index={i} t={t} lang={lang} />
             ))}
           </div>

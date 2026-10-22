@@ -1,9 +1,11 @@
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useEffect, useRef } from 'react'
 import { education, education_fi, languages, certs, ui } from '../data/content'
 import { useLang } from '../context/AppContext'
 import styles from './About.module.css'
 
 export default function About() {
+  const reducedMotion = useReducedMotion()
   const parallaxRef = useRef(null)
   const { lang } = useLang()
   const t = ui[lang].about
@@ -11,6 +13,10 @@ export default function About() {
 
   useEffect(() => {
     const el = parallaxRef.current
+    if (reducedMotion) {
+      if (el) el.style.transform = ''
+      return
+    }
     const onScroll = () => {
       if (!el) return
       const rect = el.closest('section').getBoundingClientRect()
@@ -19,7 +25,7 @@ export default function About() {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [reducedMotion])
 
   return (
     <section id="about" className={styles.about} aria-labelledby="about-heading">

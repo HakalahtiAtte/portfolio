@@ -3,22 +3,39 @@ import { createContext, useContext, useState, useEffect } from 'react'
 const ThemeContext = createContext()
 const LangContext  = createContext()
 
+function readPreference(key, allowedValues, fallback) {
+  try {
+    const stored = localStorage.getItem(key)
+    return allowedValues.includes(stored) ? stored : fallback
+  } catch {
+    return fallback
+  }
+}
+
+function savePreference(key, value) {
+  try {
+    localStorage.setItem(key, value)
+  } catch {
+    return
+  }
+}
+
 export function AppProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    const stored = localStorage.getItem('theme')
-    if (stored) return stored
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    const fallback = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    return readPreference('theme', ['light', 'dark'], fallback)
   })
 
-  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'en')
+  const [lang, setLang] = useState(() => readPreference('lang', ['en', 'fi'], 'en'))
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
+    savePreference('theme', theme)
   }, [theme])
 
   useEffect(() => {
-    localStorage.setItem('lang', lang)
+    document.documentElement.lang = lang
+    savePreference('lang', lang)
   }, [lang])
 
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')

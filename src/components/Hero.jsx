@@ -1,3 +1,4 @@
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useEffect, useRef, useState } from 'react'
 import { meta, ui } from '../data/content'
 import { useTheme, useLang } from '../context/AppContext'
@@ -17,6 +18,7 @@ const RING_CIRC = 2 * Math.PI * RING_R
 const ROW_CY    = [63, 85, 107, 129]
 
 function LighthouseCard() {
+  const reducedMotion = useReducedMotion()
   const { theme } = useTheme()
   const ref = useRef(null)
   const pos = useRef({ x: 0, y: 0 })
@@ -56,6 +58,15 @@ function LighthouseCard() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (reducedMotion) {
+      el.style.transform = ''
+      el.style.cursor = 'default'
+      pos.current = { x: 0, y: 0 }
+      vel.current = { x: 0, y: 0 }
+      dragging.current = false
+      return
+    }
+    el.style.cursor = 'grab'
 
     function settle() {
       if (dragging.current) return
@@ -122,7 +133,7 @@ function LighthouseCard() {
       window.removeEventListener('touchend', onUp)
       cancelAnimationFrame(rafRef.current)
     }
-  }, [])
+  }, [reducedMotion])
 
   return (
     <div ref={ref} className={styles.cassetteOuter} aria-hidden="true" style={{ pointerEvents: 'auto' }}>
@@ -167,7 +178,7 @@ function LighthouseCard() {
           ))}
         </svg>
 
-        {hint && <div className={styles.cassetteHint}>drag me</div>}
+        {hint && !reducedMotion && <div className={styles.cassetteHint}>drag me</div>}
       </div>
     </div>
   )
@@ -193,19 +204,24 @@ function ScrollIndicator() {
 
 // ── HERO ──────────────────────────────────────────────────
 export default function Hero() {
+  const reducedMotion = useReducedMotion()
   const parallaxRef = useRef(null)
   const { lang } = useLang()
   const t = ui[lang].hero
 
   useEffect(() => {
     const el = parallaxRef.current
+    if (reducedMotion) {
+      if (el) el.style.transform = ''
+      return
+    }
     const onScroll = () => {
       if (!el) return
       el.style.transform = `translateY(${window.scrollY * 0.3}px)`
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [reducedMotion])
 
   return (
     <section className={styles.hero} id="hero" aria-label="Introduction">
